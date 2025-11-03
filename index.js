@@ -1,5 +1,5 @@
 // index.js
-const COHORT = "YOUR_COHORT_AND_NAME"; // Replace with your cohort + name
+const COHORT = "Shikha";
 const API_URL = `https://fsa-puppy-bowl.herokuapp.com/api/${COHORT}`;
 
 // State
@@ -32,7 +32,6 @@ const init = async () => {
     newPlayerForm.addEventListener('submit', handleAddPlayer);
     removePlayerButton.addEventListener('click', handleRemovePlayer);
 };
-
 // Fetch all players from the API
 const fetchAllPlayers = async () => {
     try {
@@ -47,7 +46,6 @@ const fetchAllPlayers = async () => {
         console.error('Error fetching players:', err);
     }
 };
-
 // Fetch all teams from the API
 const fetchAllTeams = async () => {
     try {
@@ -62,7 +60,6 @@ const fetchAllTeams = async () => {
         console.error('Error fetching teams:', err);
     }
 };
-
 // Render all players to the roster
 const renderAllPlayers = () => {
     playerRoster.innerHTML = '';
@@ -84,7 +81,6 @@ const renderAllPlayers = () => {
         playerRoster.appendChild(playerCard);
     });
 };
-
 // Populate the team select dropdown
 const populateTeamSelect = () => {
     // Clear existing options except the default
@@ -100,7 +96,6 @@ const populateTeamSelect = () => {
         teamSelect.appendChild(option);
     });
 };
-
 // Select a player and display details
 const selectPlayer = (player) => {
     selectedPlayer = player;
