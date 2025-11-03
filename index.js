@@ -1,217 +1,107 @@
-// index.js
-const COHORT = "YOUR_COHORT_AND_NAME"; // Replace with your cohort + name
-const API_URL = `https://fsa-puppy-bowl.herokuapp.com/api/${COHORT}`;
 
-// State
-let allPlayers = [];
-let allTeams = [];
-let selectedPlayer = null;
+//If you would like to, you can create a variable to store the API_URL here.
+//This is optional. if you do not want to, skip this and move on.
 
-// DOM Elements
-const playerRoster = document.getElementById('player-roster');
-const newPlayerForm = document.getElementById('new-player-form');
-const playerDetails = document.getElementById('player-details');
-const noPlayerSelected = document.getElementById('no-player-selected');
-const detailName = document.getElementById('detail-name');
-const detailId = document.getElementById('detail-id');
-const detailBreed = document.getElementById('detail-breed');
-const detailStatus = document.getElementById('detail-status');
-const detailTeam = document.getElementById('detail-team');
-const detailImage = document.getElementById('detail-image');
-const removePlayerButton = document.getElementById('remove-player');
-const teamSelect = document.getElementById('team');
 
-// Initialize the application
-const init = async () => {
-    await fetchAllPlayers();
-    await fetchAllTeams();
-    renderAllPlayers();
-    populateTeamSelect();
-    
-    // Event Listeners
-    newPlayerForm.addEventListener('submit', handleAddPlayer);
-    removePlayerButton.addEventListener('click', handleRemovePlayer);
-};
+/////////////////////////////
+/*This looks like a good place to declare any state or global variables you might need*/
 
-// Fetch all players from the API
+////////////////////////////
+
+
+
+/**
+ * Fetches all players from the API.
+ * This function should not be doing any rendering
+ * @returns {Object[]} the array of player objects
+ */
 const fetchAllPlayers = async () => {
-    try {
-        const response = await fetch(`${API_URL}/players`);
-        const result = await response.json();
-        if (result.success) {
-            allPlayers = result.data.players;
-        } else {
-            console.error('Failed to fetch players:', result.error);
-        }
-    } catch (err) {
-        console.error('Error fetching players:', err);
-    }
+  //TODO
+
 };
 
-// Fetch all teams from the API
-const fetchAllTeams = async () => {
-    try {
-        const response = await fetch(`${API_URL}/teams`);
-        const result = await response.json();
-        if (result.success) {
-            allTeams = result.data.teams;
-        } else {
-            console.error('Failed to fetch teams:', result.error);
-        }
-    } catch (err) {
-        console.error('Error fetching teams:', err);
-    }
+/**
+ * Fetches a single player from the API.
+ * This function should not be doing any rendering
+ * @param {number} playerId
+ * @returns {Object} the player object
+ */
+const fetchSinglePlayer = async (playerId) => {
+  //TODO
 };
 
-// Render all players to the roster
-const renderAllPlayers = () => {
-    playerRoster.innerHTML = '';
-    
-    if (allPlayers.length === 0) {
-        playerRoster.innerHTML = '<p>No players in the roster.</p>';
-        return;
-    }
-    
-    allPlayers.forEach(player => {
-        const playerCard = document.createElement('div');
-        playerCard.className = 'player-card';
-        playerCard.innerHTML = `
-            <img src="${player.imageUrl}" alt="${player.name}">
-            <h3>${player.name}</h3>
-        `;
-        
-        playerCard.addEventListener('click', () => selectPlayer(player));
-        playerRoster.appendChild(playerCard);
-    });
+/**
+ * Adds a new player to the roster via the API.
+ * Once a player is added to the database, the new player
+ * should appear in the all players page without having to refresh
+ * @param {Object} newPlayer the player to add
+ */
+/* Note: we need data from our user to be able to add a new player
+ * Do we have a way to do that currently...? 
+*/
+/**
+ * Note#2: addNewPlayer() expects you to pass in a
+ * new player object when you call it. How can we
+ * create a new player object and then pass it to addNewPlayer()?
+ */
+
+const addNewPlayer = async (newPlayer) => {
+  //TODO
 };
 
-// Populate the team select dropdown
-const populateTeamSelect = () => {
-    // Clear existing options except the default
-    while (teamSelect.children.length > 1) {
-        teamSelect.removeChild(teamSelect.lastChild);
-    }
-    
-    // Add team options
-    allTeams.forEach(team => {
-        const option = document.createElement('option');
-        option.value = team.id;
-        option.textContent = team.name;
-        teamSelect.appendChild(option);
-    });
+/**
+ * Removes a player from the roster via the API.
+ * Once the player is removed from the database,
+ * the player should also be removed from our view without refreshing
+ * @param {number} playerId the ID of the player to remove
+ */
+/**
+ * Note: In order to call removePlayer() some information is required.
+ * Unless we get that information, we cannot call removePlayer()....
+ */
+/**
+ * Note#2: Don't be afraid to add parameters to this function if you need to!
+ */
+
+const removePlayer = async (playerId) => {
+  //TODO
+
 };
 
-// Select a player and display details
-const selectPlayer = (player) => {
-    selectedPlayer = player;
-    
-    // Update UI to show player details
-    noPlayerSelected.classList.add('hidden');
-    playerDetails.classList.remove('hidden');
-    
-    // Populate player details
-    detailName.textContent = player.name;
-    detailId.textContent = player.id;
-    detailBreed.textContent = player.breed;
-    detailStatus.textContent = player.status;
-    detailImage.src = player.imageUrl;
-    detailImage.alt = player.name;
-    
-    // Display team name or "Unassigned"
-    if (player.teamId) {
-        const team = allTeams.find(t => t.id === player.teamId);
-        detailTeam.textContent = team ? team.name : 'Unknown Team';
-    } else {
-        detailTeam.textContent = 'Unassigned';
-    }
+/**
+ * Updates html to display a list of all players or a single player page.
+ *
+ * If there are no players, a corresponding message is displayed instead.
+ *
+ * Each player in the all player list is displayed with the following information:
+ * - name
+ * - id
+ * - image (with alt text of the player's name)
+ *
+ * Additionally, for each player we should be able to:
+ * - See details of a single player. The page should show
+ *    specific details about the player clicked 
+ * - Remove from roster. when clicked, should remove the player
+ *    from the database and our current view without having to refresh
+ *
+ */
+const render = () => {
+  // TODO
+
+  
 };
 
-// Handle adding a new player
-const handleAddPlayer = async (event) => {
-    event.preventDefault();
-    
-    const formData = new FormData(newPlayerForm);
-    const name = formData.get('name');
-    const breed = formData.get('breed');
-    const imageUrl = formData.get('imageUrl');
-    const teamId = formData.get('teamId');
-    
-    const newPlayer = {
-        name,
-        breed,
-        imageUrl
-    };
-    
-    // Only add teamId if it's not empty
-    if (teamId) {
-        newPlayer.teamId = parseInt(teamId);
-    }
-    
-    try {
-        const response = await fetch(`${API_URL}/players`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newPlayer),
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            // Refresh the player list
-            await fetchAllPlayers();
-            renderAllPlayers();
-            
-            // Reset the form
-            newPlayerForm.reset();
-            
-            alert('Player added successfully!');
-        } else {
-            console.error('Failed to add player:', result.error);
-            alert('Failed to add player. Please try again.');
-        }
-    } catch (err) {
-        console.error('Error adding player:', err);
-        alert('Error adding player. Please try again.');
-    }
+
+/**
+ * Initializes the app by calling render
+ * HOWEVER....
+ */
+const init = async () => {
+  //Before we render, what do we always need...?
+
+  render();
+
 };
 
-// Handle removing a player
-const handleRemovePlayer = async () => {
-    if (!selectedPlayer) return;
-    
-    if (!confirm(`Are you sure you want to remove ${selectedPlayer.name} from the roster?`)) {
-        return;
-    }
-    
-    try {
-        const response = await fetch(`${API_URL}/players/${selectedPlayer.id}`, {
-            method: 'DELETE',
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            // Refresh the player list
-            await fetchAllPlayers();
-            renderAllPlayers();
-            
-            // Clear the selected player
-            selectedPlayer = null;
-            noPlayerSelected.classList.remove('hidden');
-            playerDetails.classList.add('hidden');
-            
-            alert('Player removed successfully!');
-        } else {
-            console.error('Failed to remove player:', result.error);
-            alert('Failed to remove player. Please try again.');
-        }
-    } catch (err) {
-        console.error('Error removing player:', err);
-        alert('Error removing player. Please try again.');
-    }
-};
+init();
 
-// Initialize the app when the DOM is loaded
-document.addEventListener('DOMContentLoaded', init);

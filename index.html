@@ -1,68 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puppy Bowl Roster Manager</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Puppy Bowl Roster Manager</h1>
-    </header>
-    
-    <main>
-        <section id="player-form-section">
-            <h2>Add New Puppy</h2>
-            <form id="new-player-form">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="breed">Breed:</label>
-                    <input type="text" id="breed" name="breed" required>
-                </div>
-                <div class="form-group">
-                    <label for="imageUrl">Image URL:</label>
-                    <input type="url" id="imageUrl" name="imageUrl" required>
-                </div>
-                <div class="form-group">
-                    <label for="team">Team:</label>
-                    <select id="team" name="teamId">
-                        <option value="">Unassigned</option>
-                    </select>
-                </div>
-                <button type="submit">Add to Roster</button>
-            </form>
-        </section>
-        
-        <section id="player-details-section">
-            <h2>Player Details</h2>
-            <div id="player-details">
-                <p id="no-player-selected">Select a player to see details</p>
-                <div id="player-info" class="hidden">
-                    <div class="player-image-container">
-                        <img id="detail-image" src="" alt="">
-                    </div>
-                    <div class="player-details">
-                        <h3 id="detail-name"></h3>
-                        <p><strong>ID:</strong> <span id="detail-id"></span></p>
-                        <p><strong>Breed:</strong> <span id="detail-breed"></span></p>
-                        <p><strong>Status:</strong> <span id="detail-status"></span></p>
-                        <p><strong>Team:</strong> <span id="detail-team"></span></p>
-                        <button id="remove-player">Remove from Roster</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="player-roster-section">
-            <h2>Player Roster</h2>
-            <div id="player-roster"></div>
-        </section>
-    </main>
-    
-    <script src="index.js"></script>
-</body>
+  <head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>
+
